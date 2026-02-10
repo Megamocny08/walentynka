@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zostaniesz moją Walentynką?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      color: #d81b60;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, font-size 0.2s, padding 0.2s;
+    }
+
+    #yesBtn {
+      background-color: #d81b60;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #ffffff;
+      color: #d81b60;
+      border: 2px solid #d81b60;
+    }
+
+    img {
+      width: 260px;
+      height: auto;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h1>Zostaniesz moją Walentynką? ❤️</h1>
+      <div class="buttons">
+        <button id="yesBtn">Tak</button>
+        <button id="noBtn">Nie</button>
+      </div>
+    </div>
+
+    <img src="zdjecie.jpg" alt="Zdjęcie">
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let yesScale = 1;
+
+    noBtn.addEventListener("click", () => {
+      yesScale += 0.4;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      const currentFontSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+      if (currentFontSize > 8) {
+        noBtn.style.fontSize = currentFontSize - 2 + "px";
+        noBtn.style.padding = "6px 14px";
+      }
+
+      if (yesScale >= 5) {
+        yesBtn.style.position = "fixed";
+        yesBtn.style.top = "50%";
+        yesBtn.style.left = "50%";
+        yesBtn.style.transform = "translate(-50%, -50%) scale(8)";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          background:#ffe6f0;
+          font-family:Arial,sans-serif;
+          text-align:center;
+        ">
+          <h1 style="color:#d81b60; font-size:40px; margin-bottom:20px;">
+            Jeeee! 🥰
+          </h1>
+          <p style="font-size:22px; color:#ad1457;">
+            Oficjalnie jesteś moją Walentynką! 💌
+          </p>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
